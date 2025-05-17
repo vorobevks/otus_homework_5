@@ -23,6 +23,7 @@ spec:
       containers:
         - name: {{ include "this.fullname" . }}-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.deployment.port }}
           env:

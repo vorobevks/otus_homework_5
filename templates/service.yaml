@@ -2,11 +2,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "this.fullname" . }}-service
+  labels:
+    app: {{ include "this.fullname" . }}-service
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
+      name: app
       targetPort: {{ .Values.deployment.port }}
       protocol: TCP
+    - name: metrics
+      port: {{ .Values.deployment.port }}
+      targetPort: {{ .Values.deployment.port }}
+      protocol: TCP
+
   selector:
     {{- include "this.selectorLabels" . | nindent 4 }}

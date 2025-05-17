@@ -1,0 +1,8 @@
+prometheus:
+  serviceMonitor:
+    enabled: true
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector:
+      matchLabels:
+        release: prometheus
